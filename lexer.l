@@ -3,29 +3,32 @@
 %{
 %}
 
+%s comment
 %x include
-%s too_many_chars
 
 %%
+"%"              {printf("Begin comment\n"); BEGIN(comment);}
 
-\include         BEGIN(include);
-[a-z]+          ECHO;
-[^a-z\n]*\n?    ECHO;
+<comment>.*\n   { 
+    printf("Found a comment: %s \n", yytext); 
+    BEGIN(INITIAL); 
+}
 
-<include>[ \t]*     /* eat the whitespace */
-<include>[^ \t\n]+ {    /* got the include file name */
-    printf("Nazwa: %s: ", yytext);
-    return 0;
+[a-z]+              {printf("Found a word: %s \n", yytext);}
+"\\include"         {printf("Begin include\n"); BEGIN(include);}
 
-    yyin = fopen( yytext, "r" );
+<include>[^ \t\n\{}]+ {    /* got the include file name */
+    printf("Nazwa: %s\n", yytext);
 
-    if(!yyin)
-    {
-        perror("Coś poszło nie tak");
-        return 0;
-    }
+    //yyin = fopen( yytext, "r" );
 
-    yypush_buffer_state(yy_create_buffer( yyin, YY_BUF_SIZE ));
+    //if(!yyin)
+    //{
+    //    perror("Coś poszło nie tak");
+    //    return 0;
+    //}
+
+    //yypush_buffer_state(yy_create_buffer( yyin, YY_BUF_SIZE ));
     BEGIN(INITIAL);
  }
 
