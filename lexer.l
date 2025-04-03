@@ -8,11 +8,11 @@
 
 %%
 
-[ \t\r\n]+   { /* Skip empty lines and lines with only whitespace */ }
-.{132,}   { printf("Warning: More than 132 characters in one line!\n"); }
+^[ \t\r\n]+$   { printf("endline"); /* Skip empty lines and lines with only whitespace */ }
+.{132,}\n   { printf("Warning: More than 132 characters in one line!\n"); }
 
 "%"     {printf("Begin comment\n"); BEGIN(comment);}
-<comment>.* { printf("End comment...\n\n"); BEGIN(INITIAL); }
+<comment>.* { printf("End comment...\n"); BEGIN(INITIAL); }
 
 "\\include"         {printf("Begin include\n"); BEGIN(include);}
 
@@ -48,6 +48,8 @@
     printf("\n");
     BEGIN(include);
  }
+
+. {ECHO;}
 
 %%
 
