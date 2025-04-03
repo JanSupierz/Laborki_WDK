@@ -773,18 +773,13 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "lexer.l"
 #line 4 "lexer.l"
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <string.h>
-    #include <ctype.h>
-
     int counter = 0;
     int specialCounter = 0;
     int sum = 0;  // Sum of numbers in .itc files
     int inITC = 0; // Flag to check if we're in an .itc file
-#line 786 "lex.yy.c"
+#line 781 "lex.yy.c"
 
-#line 788 "lex.yy.c"
+#line 783 "lex.yy.c"
 
 #define INITIAL 0
 #define comment 1
@@ -1005,10 +1000,10 @@ YY_DECL
 		}
 
 	{
-#line 20 "lexer.l"
+#line 15 "lexer.l"
 
 
-#line 1012 "lex.yy.c"
+#line 1007 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1067,39 +1062,39 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 22 "lexer.l"
+#line 17 "lexer.l"
 { /* Skip empty lines and whitespace */ }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 23 "lexer.l"
+#line 18 "lexer.l"
 { printf("Warning: More than 132 characters in one line!\n"); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 25 "lexer.l"
+#line 20 "lexer.l"
 { printf("Begin comment\n"); BEGIN(comment); }
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 26 "lexer.l"
+#line 21 "lexer.l"
 { printf("End comment...\n"); BEGIN(inITC == 1? itc : INITIAL); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 28 "lexer.l"
+#line 23 "lexer.l"
 { printf("Begin include\n"); BEGIN(include); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 29 "lexer.l"
+#line 24 "lexer.l"
 { }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 31 "lexer.l"
+#line 26 "lexer.l"
 {    
     printf("File: %s\n", yytext);
     ++counter;
@@ -1129,7 +1124,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 58 "lexer.l"
+#line 53 "lexer.l"
 {
     printf("End include\n");
     BEGIN(INITIAL);
@@ -1137,7 +1132,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 63 "lexer.l"
+#line 58 "lexer.l"
 { /* Handle numbers inside .itc files */
     printf("Number: %s\n", yytext);
     sum += atoi(yytext);
@@ -1148,7 +1143,7 @@ case YY_STATE_EOF(comment):
 case YY_STATE_EOF(include):
 case YY_STATE_EOF(itc):
 case YY_STATE_EOF(word):
-#line 68 "lexer.l"
+#line 63 "lexer.l"
 {  /* Handle end of .itc files */
 
     if(inITC == 1)
@@ -1167,27 +1162,27 @@ case YY_STATE_EOF(word):
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 84 "lexer.l"
+#line 79 "lexer.l"
 { ECHO; BEGIN(word); }
 	YY_BREAK
 case 11:
 /* rule 11 can match eol */
 YY_RULE_SETUP
-#line 85 "lexer.l"
+#line 80 "lexer.l"
 { ECHO; BEGIN(inITC == 1? itc : INITIAL); }
 	YY_BREAK
 case 12:
 /* rule 12 can match eol */
 YY_RULE_SETUP
-#line 87 "lexer.l"
+#line 82 "lexer.l"
 { }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 88 "lexer.l"
+#line 83 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 1191 "lex.yy.c"
+#line 1186 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2190,7 +2185,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 88 "lexer.l"
+#line 83 "lexer.l"
 
 
 int main() {

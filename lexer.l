@@ -1,11 +1,6 @@
 %option noyywrap
 
 %{
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <string.h>
-    #include <ctype.h>
-
     int counter = 0;
     int specialCounter = 0;
     int sum = 0;  // Sum of numbers in .itc files
